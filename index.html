@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementasi Regex Pada Validasi Email & Password</title>
+    <style>
+        body { font-family: sans-serif; padding: 10px; }
+        input { margin: 5px 0; padding: 5px; width: 300px; }
+        .error { color: red; }
+        .success { color: green; }
+      </style>
+</head>
+<body>
+    
+    <form id="form">
+        <label>Email:</label><br>
+        <input type="text" id="email" placeholder="user@example.com"><br>
+    
+        <label>Password:</label><br>
+        <input type="password" id="password" placeholder="Minimal 8 karakter huruf besar, kecil, dan angka"><br>
+    
+        <button type="submit">Submit</button>
+    </form>
+    
+    <div id="message"></div>
+
+    <script>
+        document.getElementById("form").addEventListener("submit", function(event)
+        {
+            event.preventDefault();
+        
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const message = document.getElementById("message");
+        
+            //regex email
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+        
+            //regex password
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*#?&^]{8,}$/;
+            //minimal satu huruf kecil
+            //minimal satu huruf besar
+            //minimal satu digit angka 0-9
+            //minimal satu karakter berbentuk simbol
+            //karakter yang diperbolehkan, minimal 8 karakter
+        
+            if (!emailRegex.test(email)) {
+                message.innerHTML = "<p class='error'>Email tidak valid.</p>";
+            } else if (!passwordRegex.test(password)) {
+                message.innerHTML = "<p class='error'>Password harus minimal 8 karakter, dan mengandung huruf besar, kecil, angka, dan simbol.</p>";
+            } else {
+                message.innerHTML = "<p class='success'>Validasi berhasil!</p>";
+            }
+        });
+      </script>
+    
+</body>
+</html>
